@@ -3,6 +3,7 @@ package com.example.a12902.designmode;
 import android.graphics.Bitmap;
 import android.widget.ImageView;
 
+
 public class ImageLoader {
     private static ImageLoader instance;
     private ImageCache mImageCache=new MemoryCache();
@@ -10,6 +11,7 @@ public class ImageLoader {
 
     }
 
+    //单例模式
     public static ImageLoader getInstance(){
         if(instance==null){
             synchronized (ImageLoader.class){

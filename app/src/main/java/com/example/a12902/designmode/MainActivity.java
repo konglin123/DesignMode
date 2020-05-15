@@ -10,10 +10,28 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initUse();
+//        initSingleAndBuilder();
+//        initOrigin();
+//        initFactory();
     }
 
-    private void initUse() {
+    private void initFactory() {
+        AudiCarFactory audiCarFactory = new AudiCarFactory();
+        AudiQ3 audiQ3 = audiCarFactory.creatAudiCar(AudiQ3.class);
+        AudiQ5 audiQ5 = audiCarFactory.creatAudiCar(AudiQ5.class);
+        audiQ3.drive();
+        audiQ5.drive();
+    }
+
+    private void initOrigin() {
+        OriginDoc originDoc = new OriginDoc();
+        originDoc.setText("这是原text");
+        OriginDoc doc = (OriginDoc) originDoc.clone();
+        originDoc.setText("这是修改的text");
+        doc.showDoc();
+    }
+
+    private void initSingleAndBuilder() {
         ImageLoader instance = ImageLoader.getInstance();
         //内存缓存
         instance.setImageCache(new MemoryCache());
@@ -33,5 +51,11 @@ public class MainActivity extends AppCompatActivity {
                 return null;
             }
         });
+
+        ImageLoderConfig config = new ImageLoderConfig.Builder().setImageCache(new DoubleCache())
+                .setLoadingFailedImgId(1)
+                .setLoadingImgId(0)
+                .create();
+
     }
 }
