@@ -3,6 +3,7 @@ package com.example.a12902.designmode;
 import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -13,6 +14,37 @@ public class MainActivity extends AppCompatActivity {
 //        initSingleAndBuilder();
 //        initOrigin();
 //        initFactory();
+//        initStrategy();
+//        initState();
+        initRequest();
+    }
+
+    private void initRequest() {
+        GroupLeader groupLeader = new GroupLeader();
+        Manager manager = new Manager();
+        groupLeader.nextHandler=manager;
+        groupLeader.handleRequest(3000);
+    }
+
+    private void initState() {
+        findViewById(R.id.forward).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /**
+                 * 未登录状态会跳转登录界面，已登陆状态会直接转发
+                 * 好处是少了if/else判断，不用每次都要判断状态，a状态执行a，b状态执行b
+                 */
+                LoginContext.getInstance().forword(MainActivity.this);
+            }
+        });
+    }
+
+    private void initStrategy() {
+        TranficalCalculator ins = TranficalCalculator.getIns();
+        //设置计算策略
+        ins.setStrategy(new BusStrategy());
+        //计算价格
+        ins.calculatePrice(10);
     }
 
     private void initFactory() {
