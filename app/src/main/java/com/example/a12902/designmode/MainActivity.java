@@ -11,18 +11,42 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        initSingleAndBuilder();
-//        initOrigin();
-//        initFactory();
-//        initStrategy();
-//        initState();
-        initRequest();
+//        initSingleAndBuilder(); 单例
+//        initOrigin(); 原型
+//        initFactory(); 工厂
+//        initStrategy(); 策略
+//        initState(); 状态
+//        initRequest(); 责任链
+//        initCommand(); 命令
+//        initObserve();  观察者
+    }
+
+    private void initObserve() {
+        //观察者们
+        Coder corder1 = new Coder("corder1");
+        Coder corder2 = new Coder("corder2");
+        Coder corder3 = new Coder("corder3");
+        //被观察者
+        TechBook techBook = new TechBook();
+        //将观察者们注册到观察者列表
+        techBook.addObserver(corder1);
+        techBook.addObserver(corder2);
+        techBook.addObserver(corder3);
+        //发布消息
+        techBook.postNewPublication("新的一期技术周刊发布啦");
+
+    }
+
+    private void initCommand() {
+        ConcreteCommand concreteCommand = new ConcreteCommand(new Receiver());
+        Invoker invoker = new Invoker(concreteCommand);
+        invoker.action();
     }
 
     private void initRequest() {
         GroupLeader groupLeader = new GroupLeader();
         Manager manager = new Manager();
-        groupLeader.nextHandler=manager;
+        groupLeader.nextHandler = manager;
         groupLeader.handleRequest(3000);
     }
 
