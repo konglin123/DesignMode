@@ -19,6 +19,24 @@ public class MainActivity extends AppCompatActivity {
 //        initRequest(); 责任链
 //        initCommand(); 命令
 //        initObserve();  观察者
+
+//        initIterator(); 迭代器
+    }
+
+    private void initIterator() {
+        CompanyMin companyMin = new CompanyMin();
+        Iterator minItrator = companyMin.iterator();
+        checkIterator(minItrator);
+
+        CompanyHui companyHui = new CompanyHui();
+        Iterator huiIterator = companyHui.iterator();
+        checkIterator(huiIterator);
+    }
+
+    private void checkIterator(Iterator iterator){
+        while (iterator.hasNext()){
+            System.out.println(iterator.next().toString());
+        }
     }
 
     private void initObserve() {
