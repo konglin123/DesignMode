@@ -19,8 +19,16 @@ public class MainActivity extends AppCompatActivity {
 //        initRequest(); 责任链
 //        initCommand(); 命令
 //        initObserve();  观察者
-
 //        initIterator(); 迭代器
+//        initTemplate(); 模板
+
+    }
+
+    private void initTemplate() {
+        CoderComputer coderComputer = new CoderComputer();
+        coderComputer.startUp();
+        MilitaryComputer militaryComputer = new MilitaryComputer();
+        militaryComputer.startUp();
     }
 
     private void initIterator() {
